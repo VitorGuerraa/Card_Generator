@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
+
+
+:root {
+    /*Colors*/
+    --blackColor: #191919;
+    --silver2Color: #A4A4A4;
+    --silver1Color: #D2D2D2;
+    --whiteColor: #FFFFFF;
+    --blueColor: #00A8DD;
+    --greenColor: #00DD80;
+    --yellowColor: #BEDD00;
+    --orangeColor: #DD4200;
+    --pinkColor: #DD0035;
+
+    /*Border*/
+    --radius40: 2.500rem;
+    --radius25: 1.562rem;
+    --radius10: .625rem;
+    --radius05: .312rem;
+
+    /*Padding*/
+    --padding10: 0.625rem;
+
+    /*Shadow Style*/
+    --borderShadow: 5px solid var(--blackColor);
+    --positionShadow: -10px 10px 0px var(--blackColor);
+
+    /*Tags*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0 none;
+    font-family: 'Poppins', sans-serif;
+    color: var(--blackColor);
+    list-style: none;
+    outline: none;
+}
+
+body {
+    background: var(--orangeColor);
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.shadow {
+    border: var(--borderShadow);
+    box-shadow: var(--positionShadow);
+}
+
+.container {
+    width: 943px;
+    height: 459px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: var(--blueColor);
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius40);
+    padding: 70px;
+}
+
+.colum1 {
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    margin-right: 80px;
+}
+
+.colum2 {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.colum2>div {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+img {
+    width: 217px;
+    height: 217px;
+
+    border-radius: var(--radius40);
+}
+
+.userCode {
+    display: flex;
+    flex-direction: row;
+}
+
+.userCode label {
+    background-color: var(--whiteColor);
+    width: 20px;
+    height: 20px;
+}
+
+.userCode p {
+    background-color: var(--whiteColor);
+    display: flex;
+    width: 20px;
+    height: 20px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 3px;
+    border-radius: var(--radius05);
+
+    font-size: 13px;
+
+}
+
+.divInput {
+    background: var(--whiteColor);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border: none;
+    border-radius: var(--radius10);
+
+    padding: 5px 10px 5px 10px;
+}
+
+.divInput p {
+    width: 100%;
+
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--silver2Color);
+}
+
+.divInput input {
+    width: 100%;
+    background: none;
+}
+
+.divInput>div[id="infosInput"] {
+    width: 96%;
+}
+
+#verify {
+    background: var(--silver1Color);
+    width: 6px;
+    height: 100%;
+
+    border-radius: var(--radius10);
+}
+
+.inputName {
+    width: 150px;
+    height: 48.53px;
+}
+
+.inputPronoun {
+    width: 100px;
+    height: 48.53px;
+}
+
+.inputAge {
+    width: 70px;
+    height: 48.53px;
+}
+
+.inputLocation {
+    width: 300px;
+    height: 48.53px;
+}
+
+.inputEmoji {
+    width: 60px;
+    height: 48.53px;
+}
+
+.inputTags {
+    width: 100%;
+    height: auto;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li {
+    background: var(--silver1Color);
+
+    margin: 1px 3px;
+    padding: 5px;
+
+    color: var(--blackColor);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--radius05);
+}
+
+.saveBtn {
+    background: var(--blueColor);
+    width: 100px;
+    height: 100px;
+
+    border-radius: var(--radius25);
+    margin-top: 50px;
+    cursor: pointer;
+}

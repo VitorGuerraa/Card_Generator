@@ -6,42 +6,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Generator</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="container">
+    <div class="container">
         <div class="card shadow">
-            <div>
+            <div class="colum1">
+                <img src="../Img/profile-1.png"></img>
                 <div class="userCode">
-                    <label for="">1</label>
-                    <label for="">5</label>
-                    <label for="">8</label>
-                    <label for="">6</label>
-                    <label for="">3</label>
-                    <label for="">0</label>
+                    <p>1</p>
+                    <p>5</p>
+                    <p>9</p>
+                    <p>0</p>
+                    <p>7</p>
+                    <p>3</p>
+
                 </div>
-                <div class="userImg"></div>
-                <input class="inputEmoji" value="👽"></input>
             </div>
-            <div>
+            <div class="colum2">
                 <div>
-                    <input class="inputName" value="Vitor Guerra"></input>
-                    <input class="inputPronoun" value="He/Him"></input>
+                    <div class="divInput inputName">
+                        <div id="infosInput">
+                            <p>name</p>
+                            <input type="text" value="Vitor Guerra"></input>
+                        </div>
+                        <div id="verify"></div>
+                    </div>
+                    <div class="divInput inputLocation">
+                        <div id="infosInput">
+                            <p>location</p>
+                            <input type="text" value="São Paulo, Brazil"></input>
+                        </div>
+                        <div id="verify"></div>
+                    </div>
                 </div>
                 <div>
-                    <input class="inputAge" value="22"></input>
-                    <input class="inputLocation" value="São Paulo, Brazil"></input>
+                    <div class="divInput inputPronoun">
+                        <div id="infosInput">
+                            <p>pronoun</p>
+                            <input type="text" value="He/Him"></input>
+                        </div>
+                        <div id="verify"></div>
+                    </div>
+                    <div class="divInput inputAge">
+                        <div id="infosInput">
+                            <p>age</p>
+                            <input type="number" value="22"></input>
+                        </div>
+                        <div id="verify"></div>
+                    </div>
+                    <div class="divInput inputEmoji">
+                        <div id="infosInput">
+                            <p>emoji</p>
+                            <input type="text" value="👽"></input>
+                        </div>
+                    </div>
                 </div>
-                <div class="inputTags">
-                    <ul>
-                        <li>Teste 1</li>
-                        <li>Teste 2</li>
-                    </ul>
+                <div class="divInput inputTags">
+                    <div id="infosInput">
+                        <p>tags</p>
+                        <ul>
+                            <li>Technology</li>
+                            <li>Music</li>
+                            <li>Art</li>
+                            <li>Book</li>
+                            <li>Series</li>
+                            <li>Cinema</li>
+                        </ul>
+                        <input type="text" placeholder="write here..."></input>
+                    </div>
+                    <div id="verify"></div>
                 </div>
             </div>
         </div>
-        <button class="saveBtn shadow">*-*</button>
     </div>
+    <button class="saveBtn shadow">*-*</button>
+
+    <script src="./script.js"></script>
 </body>
 
 </html>
