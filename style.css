@@ -108,10 +108,20 @@ body {
     justify-content: space-between;
 }
 
-img {
+.divImg {
+    background-color: var(--whiteColor);
     width: 217px;
     height: 217px;
 
+    cursor: pointer;
+    border-radius: var(--radius40);
+}
+
+.divImg img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
     border-radius: var(--radius40);
 }
 
@@ -214,6 +224,8 @@ img {
 ul {
     display: flex;
     flex-wrap: wrap;
+
+    padding: 6px 0px;
 }
 
 li {
