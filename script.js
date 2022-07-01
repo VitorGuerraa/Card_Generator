@@ -1,3 +1,4 @@
+/**----PROFILE IMAGE UPLOAD----*/
 const imgInput = document.querySelector('#imgInput'),
     img = document.querySelector('img');
 
@@ -19,3 +20,27 @@ imgInput.addEventListener("change", function () {
         reader.readAsDataURL(file);
     }
 })
+
+
+/**----TAGS AREAS----*/
+const divTags = document.querySelector("inputTags"),
+    inputTag = tags.querySelector("input");
+
+let maxTags = 5,
+    tags = [];
+
+
+
+
+
+/*const ul = document.querySelector("ul");
+let digts;
+
+function createDigt(e) {
+    if (e.key == "Enter") {
+        digts.slice().reverse().forEach(digts => {
+            let newDigt = `<li>10</li>`;
+            ul.insertAdjacentHTML("afterbegin", newDigt);
+        });
+    }
+}*/

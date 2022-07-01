@@ -130,13 +130,7 @@ body {
     flex-direction: row;
 }
 
-.userCode label {
-    background-color: var(--whiteColor);
-    width: 20px;
-    height: 20px;
-}
-
-.userCode p {
+.userCode li {
     background-color: var(--whiteColor);
     display: flex;
     width: 20px;
@@ -148,7 +142,7 @@ body {
     margin: 3px;
     border-radius: var(--radius05);
 
-    font-size: 13px;
+    font-size: 12px;
 
 }
 
@@ -179,7 +173,7 @@ body {
     background: none;
 }
 
-.divInput>div[id="infosInput"] {
+.infosInput {
     width: 96%;
 }
 
