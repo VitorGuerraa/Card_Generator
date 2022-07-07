@@ -75,9 +75,9 @@ form.onsubmit = (e) => {
     }
 
     //VALIDATING AGE
-    let patternNumber = /^0/; //Pattern to validate age
+    let patternNumber = /^[1-9]/; //Pattern to validate age
     ageInput.onkeyup = () => { //Validating value of this input
-        if (ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
+        if (!ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
             ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
             ageP.classList.add("pError");//adding the error class in this variable if this action happens
 
