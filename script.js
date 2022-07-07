@@ -53,9 +53,9 @@ form.onsubmit = (e) => {
     e.preventDefault();//"preventDefault" Prevent an action from happening
 
     //VALIDATING NAME
-    let patternText = /[^a-zA-Z_ ]/g; //Pattern to validate name
+    let patternText = /^[A-z ]+$/g; //Pattern to validate name
     nameInput.onkeyup = () => { //Validating value of this input
-        if (nameInput.value.match(patternText)) { //if name is empty
+        if (!nameInput.value.match(patternText) || nameInput.value == null) { //if name is empty
             nameVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
             nameP.classList.add("pError");//adding the error class in this variable if this action happens
 
@@ -77,7 +77,7 @@ form.onsubmit = (e) => {
     //VALIDATING AGE
     let patternNumber = /^0/; //Pattern to validate age
     ageInput.onkeyup = () => { //Validating value of this input
-        if (ageInput.value.match(patternNumber) || ageInput.value < 1 ) { //if age is empty
+        if (ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
             ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
             ageP.classList.add("pError");//adding the error class in this variable if this action happens
 
@@ -93,6 +93,28 @@ form.onsubmit = (e) => {
             ageP.classList.remove("pError");//removing the error class in this variable if this action happens
 
             console.log("Correct age");
+        }
+    }
+
+    //VALIDATING PRONOUN
+    let patternPronoun = /^[A-z]*[\/][A-z]*/i; //Pattern to validate pronoun
+    pronounInput.onkeyup = () => { //Validating value of this input
+        if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) { //if pronoun is empty
+            pronounVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
+            pronounP.classList.add("pError");//adding the error class in this variable if this action happens
+
+            pronounVerify.classList.remove("verifyCorrect");
+            pronounP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+
+            console.log("Error pronoun");
+        } else {
+            pronounVerify.classList.add("verifyCorrect");
+            pronounP.classList.add("pCorrect");
+
+            pronounVerify.classList.remove("verifyError");
+            pronounP.classList.remove("pError");//removing the error class in this variable if this action happens
+
+            console.log("Correct pronoun");
         }
     }
 }

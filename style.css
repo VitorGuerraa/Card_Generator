@@ -52,6 +52,17 @@ body {
     flex-direction: column;
 }
 
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 .shadow {
     border: var(--borderShadow);
     box-shadow: var(--positionShadow);
@@ -189,17 +200,19 @@ body {
 }
 
 .verifyError {
- background-color: var(--pinkColor);
+    background-color: var(--pinkColor);
 }
+
 .pError {
- color: var(--pinkColor) !important;
+    color: var(--pinkColor) !important;
 }
 
 .verifyCorrect {
- background-color: var(--greenColor);
+    background-color: var(--greenColor);
 }
+
 .pCorrect {
- color: var(--greenColor) !important;
+    color: var(--greenColor) !important;
 }
 
 .inputName {
