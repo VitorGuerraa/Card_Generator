@@ -46,26 +46,22 @@ const form = document.querySelector(".container"), //looking for "Container" cla
 
     emojiField = form.querySelector(".inputEmoji"),
     emojiVerify = emojiField.querySelector(".verify"),
-    emojiInput = emojiField.querySelector("input");
-emojiP = emojiField.querySelector("p");
+    emojiInput = emojiField.querySelector("input"),
+    emojiP = emojiField.querySelector("p");
 
 form.onsubmit = (e) => {
     e.preventDefault();//"preventDefault" Prevent an action from happening
+    let patternText = /[^a-zA-Z_]/g; //Pattern to validate name
 
-    if (nameInput.value == "") { //if name is empty
-        nameVerify.classList.add("verifyError");//adding a new class in this variable if this action happens
-        nameP.classList.add("pError");//adding a new class in this variable if this action happens
-    }
-
-    
     nameInput.onkeyup = () => { //Validating value of this input
-        let patternText = /[[:alpha:]]/; //Pattern to validate name
-
-        if (!nameInput.value.match) {//if pattern not matched with value
-            nameVerify.classList.add("verifyError");
+        if (nameInput.value.match(patternText)) { //if name is empty
+            nameVerify.classList.add("verifyError");//adding a new class in this variable if this action happens
             nameP.classList.add("pError");//adding a new class in this variable if this action happens
-        } else {,bhj            nameVerify.classList.remove("verifyError");
+            console.log("Error name")
+        } else {
+            nameVerify.classList.remove("verifyError");
             nameP.classList.remove("pError");//adding a new class in this variable if this action happens
+            console.log("Correct name")
         }
     }
 }
