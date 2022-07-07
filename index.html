@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <form class="container">
         <div class="card shadow">
             <div class="colum1">
                 <div onclick="chooseImg()" class="divImg">
@@ -22,6 +22,11 @@
                 <div class="userCode">
                     <ul>
                         <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
+                        <li>1</li>
                     </ul>
                 </div>
             </div>
@@ -29,60 +34,54 @@
                 <div>
                     <div class="divInput inputName">
                         <div class="infosInput">
-                            <p>name</p>
+                            <p class="">name</p>
                             <input type="text" value="Vitor Guerra"></input>
                         </div>
-                        <div id="verify"></div>
+                        <div class="verify"></div>
                     </div>
                     <div class="divInput inputLocation">
                         <div class="infosInput">
-                            <p>location</p>
+                            <p class="">location</p>
                             <input type="text" value="São Paulo, Brazil"></input>
                         </div>
-                        <div id="verify"></div>
+                        <div class="verify"></div>
                     </div>
                 </div>
                 <div>
                     <div class="divInput inputPronoun">
                         <div class="infosInput">
-                            <p>pronoun</p>
+                            <p class="">pronoun</p>
                             <input type="text" value="He/Him"></input>
                         </div>
-                        <div id="verify"></div>
+                        <div class="verify"></div>
                     </div>
                     <div class="divInput inputAge">
                         <div class="infosInput">
-                            <p>age</p>
+                            <p class="">age</p>
                             <input type="number" value="22"></input>
                         </div>
-                        <div id="verify"></div>
+                        <div class="verify"></div>
                     </div>
                     <div class="divInput inputEmoji">
                         <div class="infosInput">
-                            <p>emoji</p>
+                            <p class="">emoji</p>
                             <input type="text" value="👽"></input>
                         </div>
                     </div>
                 </div>
                 <div class="divInput inputTags">
                     <div class="infosInput">
-                        <p>tags - write 3</p>
+                        <p class="">tags - write 3</p>
                         <ul>
-                            <li>Technology</li>
-                            <li>Music</li>
-                            <li>Art</li>
-                            <li>Book</li>
-                            <li>Series</li>
-                            <li>Cinema</li>
+                            <input type="text" placeholder="write here..."></input>
                         </ul>
-                        <input type="text" placeholder="write here..."></input>
                     </div>
-                    <div id="verify"></div>
+                    <div class="verify"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <button class="saveBtn shadow">*-*</button>
+        <input type="submit" value="*-*" class="saveBtn shadow"></input>
+    </form>
 
     <script src="./script.js"></script>
 </body>
