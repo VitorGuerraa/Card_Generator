@@ -51,7 +51,7 @@ const form = document.querySelector(".container"), //looking for "Container" cla
 
 form.onsubmit = (e) => {
     e.preventDefault();//"preventDefault" Prevent an action from happening
-    let patternText = /[^a-zA-Z_]/g; //Pattern to validate name
+    let patternText = /[^a-zA-Z_ ]/g; //Pattern to validate name
 
     nameInput.onkeyup = () => { //Validating value of this input
         if (nameInput.value.match(patternText)) { //if name is empty
