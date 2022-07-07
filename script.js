@@ -51,17 +51,48 @@ const form = document.querySelector(".container"), //looking for "Container" cla
 
 form.onsubmit = (e) => {
     e.preventDefault();//"preventDefault" Prevent an action from happening
-    let patternText = /[^a-zA-Z_ ]/g; //Pattern to validate name
 
+    //VALIDATING NAME
+    let patternText = /[^a-zA-Z_ ]/g; //Pattern to validate name
     nameInput.onkeyup = () => { //Validating value of this input
         if (nameInput.value.match(patternText)) { //if name is empty
-            nameVerify.classList.add("verifyError");//adding a new class in this variable if this action happens
-            nameP.classList.add("pError");//adding a new class in this variable if this action happens
-            console.log("Error name")
+            nameVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
+            nameP.classList.add("pError");//adding the error class in this variable if this action happens
+
+            nameVerify.classList.remove("verifyCorrect");
+            nameP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+
+            console.log("Error name");
         } else {
+            nameVerify.classList.add("verifyCorrect");
+            nameP.classList.add("pCorrect");
+
             nameVerify.classList.remove("verifyError");
-            nameP.classList.remove("pError");//adding a new class in this variable if this action happens
-            console.log("Correct name")
+            nameP.classList.remove("pError");//removing the error class in this variable if this action happens
+
+            console.log("Correct name");
+        }
+    }
+
+    //VALIDATING AGE
+    let patternNumber = /^0/; //Pattern to validate age
+    ageInput.onkeyup = () => { //Validating value of this input
+        if (ageInput.value.match(patternNumber) || ageInput.value < 1 ) { //if age is empty
+            ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
+            ageP.classList.add("pError");//adding the error class in this variable if this action happens
+
+            ageVerify.classList.remove("verifyCorrect");
+            ageP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+
+            console.log("Error age");
+        } else {
+            ageVerify.classList.add("verifyCorrect");
+            ageP.classList.add("pCorrect");
+
+            ageVerify.classList.remove("verifyError");
+            ageP.classList.remove("pError");//removing the error class in this variable if this action happens
+
+            console.log("Correct age");
         }
     }
 }

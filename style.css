@@ -195,6 +195,13 @@ body {
  color: var(--pinkColor) !important;
 }
 
+.verifyCorrect {
+ background-color: var(--greenColor);
+}
+.pCorrect {
+ color: var(--greenColor) !important;
+}
+
 .inputName {
     width: 150px;
     height: 48.53px;
