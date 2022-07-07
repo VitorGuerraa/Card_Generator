@@ -20,7 +20,22 @@ imgInput.addEventListener("change", function () {
     }
 })
 
+/**----CODE GENERATOR----*/
+const codeField = document.querySelector(".userCode"),
+    codeUl = codeField.querySelector("ul");
 
+let codeRandom = [];
+
+while (codeRandom.length < 6) {
+    let code = Math.floor(Math.random() * 9) + 1;
+    if (codeRandom.indexOf(code) === -1) codeRandom.push(code);
+    console.log(codeRandom);
+
+}
+codeRandom.slice().reverse().forEach(code => {
+    let codeLi = `<li>${code}</li>`;
+    codeUl.insertAdjacentHTML("afterbegin", codeLi);
+});
 
 /**----INPUTS VALIDATION----*/
 const form = document.querySelector(".container"), //looking for "Container" class inside HTML document
