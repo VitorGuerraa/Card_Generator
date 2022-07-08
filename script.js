@@ -30,8 +30,8 @@ while (codeRandom.length < 6) {
     let code = Math.floor(Math.random() * 9) + 1;
     if (codeRandom.indexOf(code) === -1) codeRandom.push(code);
     console.log(codeRandom);
-
 }
+
 codeRandom.slice().reverse().forEach(code => {
     let codeLi = `<li>${code}</li>`;
     codeUl.insertAdjacentHTML("afterbegin", codeLi);
@@ -52,7 +52,7 @@ const form = document.querySelector(".container"), //looking for "Container" cla
     pronounField = form.querySelector(".inputPronoun"),
     pronounVerify = pronounField.querySelector(".verify"),
     pronounInput = pronounField.querySelector("input"),
-    pronounP = pronounField.querySelector("p"),
+    pronounP = pronounField.querySelector("p"), 
 
     ageField = form.querySelector(".inputAge"),
     ageVerify = ageField.querySelector(".verify"),
@@ -132,4 +132,36 @@ form.onsubmit = (e) => {
             console.log("Correct pronoun");
         }
     }
+
+    //TAGS INPUT
+    const tagsField = document.querySelector(".inputTags"),
+        tagsUl = tagsField.querySelector("ul"),
+        tagsInput = tagsUl.querySelector("input");
+
+    function createTag(e) { // creating tag in array
+        if (e.key == "Enter") { //detecting "enter" key pressing
+            let tag = e.target.value.replace(/\s+/g, ' ');//swapping any extra space for one in the input tag
+
+            if (tag.length > 1 && !tags.includes(tag)) {//checking text standardization
+                if (tags.length < 10) { //checking the max capacity of the array
+                    tag.split(',').forEach(tag => { //action to separate tags after comma 
+                        tags.push(tag);
+                        buildTag();
+                    })
+                }
+            }
+            e.target.value = '';
+        }
+    }
+
+/*    function buildTag() { //creating the tag in HTML code
+        tags.slice().reverse().forEach(tag => {
+            let tagIl = `<li>${tag}</li>`;
+        });
+    }
+*/
+
+
+
+
 }
