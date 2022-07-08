@@ -52,7 +52,7 @@ const form = document.querySelector(".container"), //looking for "Container" cla
     pronounField = form.querySelector(".inputPronoun"),
     pronounVerify = pronounField.querySelector(".verify"),
     pronounInput = pronounField.querySelector("input"),
-    pronounP = pronounField.querySelector("p"), 
+    pronounP = pronounField.querySelector("p"),
 
     ageField = form.querySelector(".inputAge"),
     ageVerify = ageField.querySelector(".verify"),
@@ -138,6 +138,11 @@ form.onsubmit = (e) => {
         tagsUl = tagsField.querySelector("ul"),
         tagsInput = tagsUl.querySelector("input");
 
+    let tags = [],
+        maxTags = 10;
+
+    tagsInput.addEventListener("keyup", createTag);
+
     function createTag(e) { // creating tag in array
         if (e.key == "Enter") { //detecting "enter" key pressing
             let tag = e.target.value.replace(/\s+/g, ' ');//swapping any extra space for one in the input tag
@@ -154,14 +159,23 @@ form.onsubmit = (e) => {
         }
     }
 
-/*    function buildTag() { //creating the tag in HTML code
+    function buildTag() { //creating the tag in HTML code
+        tagsUl.querySelectorAll("li").forEach(li => li.remove());
+
         tags.slice().reverse().forEach(tag => {
             let tagIl = `<li>${tag}</li>`;
+            tagsUl.insertAdjacentHTML("afterbegin", tagIl);
         });
+        countTag();
     }
-*/
 
-
+/*    function remove(element, tag) {
+        let index = tags.indexOf(tag);
+        tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+        element.parentElement.remove();
+        
+        countTag();
+    }*/
 
 
 }
