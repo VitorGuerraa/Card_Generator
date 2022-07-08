@@ -133,49 +133,58 @@ form.onsubmit = (e) => {
         }
     }
 
-    //TAGS INPUT
-    const tagsField = document.querySelector(".inputTags"),
-        tagsUl = tagsField.querySelector("ul"),
-        tagsInput = tagsUl.querySelector("input");
 
-    let tags = [],
-        maxTags = 10;
+}
 
-    tagsInput.addEventListener("keyup", createTag);
+//TAGS INPUT
+const tagsField = document.querySelector(".inputTags"),
+    tagsUl = tagsField.querySelector("ul"),
+    tagsInput = tagsUl.querySelector("input"),
+    countNumb = 0;
 
-    function createTag(e) { // creating tag in array
-        if (e.key == "Enter") { //detecting "enter" key pressing
-            let tag = e.target.value.replace(/\s+/g, ' ');//swapping any extra space for one in the input tag
+let tags = [],
+    maxTags = 5;
 
-            if (tag.length > 1 && !tags.includes(tag)) {//checking text standardization
-                if (tags.length < 10) { //checking the max capacity of the array
-                    tag.split(',').forEach(tag => { //action to separate tags after comma 
-                        tags.push(tag);
-                        buildTag();
-                    })
-                }
+tagsInput.addEventListener("keyup", createTag);
+
+countTag();
+
+
+function countTag() {
+    countNumb.innerText = maxTags - tags.length;
+}
+
+function createTag(e) { // creating tag in array
+    if (e.key == "Enter") { //detecting "enter" key pressing
+        let tag = e.target.value.replace(/\s+/g, ' ');//swapping any extra space for one in the input tag
+
+        if (tag.length > 0 && !tags.includes(tag)) {//checking text standardization
+            if (tags.length < maxTags) { //checking the max capacity of the array
+                tag.split(',').forEach(tag => { //action to separate tags after comma 
+                    tags.push(tag);
+                    buildTag();
+                })
             }
-            e.target.value = '';
         }
+        e.target.value = '';
     }
+}
 
-    function buildTag() { //creating the tag in HTML code
-        tagsUl.querySelectorAll("li").forEach(li => li.remove());
+function buildTag() { //creating the tag in HTML code
+    tagsUl.querySelectorAll("li").forEach(li => li.remove());
 
-        tags.slice().reverse().forEach(tag => {
-            let tagIl = `<li>${tag}</li>`;
-            tagsUl.insertAdjacentHTML("afterbegin", tagIl);
-        });
-        countTag();
-    }
+    tags.slice().reverse().forEach(tag => {
+        let tagIl = `<li>${tag} <i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
+        tagsUl.insertAdjacentHTML("afterbegin", tagIl);
+    });
 
-/*    function remove(element, tag) {
-        let index = tags.indexOf(tag);
-        tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
-        element.parentElement.remove();
-        
-        countTag();
-    }*/
+    countTag();
+}
 
+function remove(element, tag) {
+    let index = tags.indexOf(tag);
+    tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+    element.parentElement.remove();
 
+    countTag();
 }
