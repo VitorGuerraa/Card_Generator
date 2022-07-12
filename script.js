@@ -132,6 +132,7 @@ form.onsubmit = (e) => {
         }
     }
 
+    //VALIDATING LOCATION
 
 }
 
@@ -190,7 +191,7 @@ function remove(element, tag) {
 
 /** USER LOCATION*/
 const locationField = document.querySelector('.inputLocation'),
-    locationLabel = localField.querySelector('label');
+    locationLabel = locationField.querySelector('label');
 
 const success = (position) => {
     console.log(position);
@@ -207,17 +208,14 @@ const success = (position) => {
             const countryUser = data.countryName;
             let locationDone = cityUser + ' - ' + countryUser;
 
-            console.log(locationDone);
+            locationLabel.insertAdjacentHTML("afterbegin", locationDone);
         })
 
-    function buildLocation() {
-        let locationHtml = `<p>${locationDone}</p>`;
-        locationField.insertAdjacentHTML("afterbegin", locationHtml);
-    }
 }
-
 const error = () => {
     console.log("Error Location *-*");
+    let errorMessage = "Error with your location 👀"
+    locationLabel.insertAdjacentHTML("afterbegin", errorMessage);
 
 }
 
