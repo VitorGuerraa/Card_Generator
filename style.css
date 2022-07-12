@@ -264,6 +264,17 @@ li {
     border-radius: var(--radius05);
 }
 
+i {
+    color: var(--blackColor);
+}
+
+label {
+    width: 100%;
+
+    font-size: 12px;
+    color: var(--blackColor);
+}
+
 .saveBtn {
     background: var(--blueColor);
     width: 100px;

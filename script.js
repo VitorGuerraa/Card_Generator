@@ -29,7 +29,6 @@ let codeRandom = [];
 while (codeRandom.length < 6) {
     let code = Math.floor(Math.random() * 9) + 1;
     if (codeRandom.indexOf(code) === -1) codeRandom.push(code);
-    console.log(codeRandom);
 }
 
 codeRandom.slice().reverse().forEach(code => {
@@ -188,3 +187,38 @@ function remove(element, tag) {
 
     countTag();
 }
+
+/** USER LOCATION*/
+const locationField = document.querySelector('.inputLocation'),
+    locationLabel = localField.querySelector('label');
+
+const success = (position) => {
+    console.log(position);
+
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+
+    const apiLocation = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+    fetch(apiLocation)
+        .then(res => res.json())
+        .then(data => {
+            const cityUser = data.city;
+            const countryUser = data.countryName;
+            let locationDone = cityUser + ' - ' + countryUser;
+
+            console.log(locationDone);
+        })
+
+    function buildLocation() {
+        let locationHtml = `<p>${locationDone}</p>`;
+        locationField.insertAdjacentHTML("afterbegin", locationHtml);
+    }
+}
+
+const error = () => {
+    console.log("Error Location *-*");
+
+}
+
+navigator.geolocation.getCurrentPosition(success, error);
