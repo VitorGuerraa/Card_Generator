@@ -36,6 +36,52 @@ codeRandom.slice().reverse().forEach(code => {
     codeUl.insertAdjacentHTML("afterbegin", codeLi);
 });
 
+/** USER LOCATION*/
+const locationField = document.querySelector('.inputLocation'),
+    locationLabel = locationField.querySelector('label');
+
+let statusLocation;
+
+const success = (position) => {
+    console.log(position);
+
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    const apiLocation = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+    fetch(apiLocation)
+        .then(res => res.json())
+        .then(data => {
+            const cityUser = data.city;
+            const countryUser = data.countryName;
+            let locationDone = cityUser + ' - ' + countryUser;
+
+            locationLabel.insertAdjacentHTML("afterbegin", locationDone);
+        })
+
+    //VALIDATING LOCATION
+    localVerify.classList.add("verifyCorrect");
+    localP.classList.add("pCorrect");
+
+    localVerify.classList.remove("verifyError");
+    localP.classList.remove("pError");
+
+}
+const error = () => {
+    console.log("Error Location *-*");
+    let errorMessage = "Error with your location 👀"
+    locationLabel.insertAdjacentHTML("afterbegin", errorMessage);
+
+    //VALIDATING LOCATION
+    localVerify.classList.remove("verifyCorrect");
+    localP.classList.remove("pCorrect");
+
+    localVerify.classList.add("verifyError");
+    localP.classList.add("pError");
+}
+
+navigator.geolocation.getCurrentPosition(success, error);
+
 /**----INPUTS VALIDATION----*/
 const form = document.querySelector(".container"), //looking for "Container" class inside HTML document
     nameField = form.querySelector(".inputName"), //looking for "inputName" class inside container class
@@ -63,78 +109,81 @@ const form = document.querySelector(".container"), //looking for "Container" cla
     emojiInput = emojiField.querySelector("input"),
     emojiP = emojiField.querySelector("p");
 
-form.onsubmit = (e) => {
-    e.preventDefault();//"preventDefault" Prevent an action from happening
 
-    //VALIDATING NAME
-    let patternText = /^[A-z ]+$/g; //Pattern to validate name
-    nameInput.onkeyup = () => { //Validating value of this input
-        if (!nameInput.value.match(patternText) || nameInput.value == null) { //if name is empty
-            nameVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
-            nameP.classList.add("pError");//adding the error class in this variable if this action happens
+function enviar() {
+    form.onsubmit = (e) => {
+        e.preventDefault();//"preventDefault" Prevent an action from happening
 
-            nameVerify.classList.remove("verifyCorrect");
-            nameP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+        //VALIDATING NAME
+        let patternText = /^[A-z ]+$/g; //Pattern to validate name
+        nameInput.onkeyup = () => { //Validating value of this input
+            if (!nameInput.value.match(patternText) || nameInput.value == null) { //if name is empty
+                nameVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
+                nameP.classList.add("pError");//adding the error class in this variable if this action happens
 
-            console.log("Error name");
-        } else {
-            nameVerify.classList.add("verifyCorrect");
-            nameP.classList.add("pCorrect");
+                nameVerify.classList.remove("verifyCorrect");
+                nameP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
 
-            nameVerify.classList.remove("verifyError");
-            nameP.classList.remove("pError");//removing the error class in this variable if this action happens
+                console.log("Error name");
+            } else {
+                nameVerify.classList.add("verifyCorrect");
+                nameP.classList.add("pCorrect");
 
-            console.log("Correct name");
+                nameVerify.classList.remove("verifyError");
+                nameP.classList.remove("pError");//removing the error class in this variable if this action happens
+
+                console.log("Correct name");
+            }
+        }
+
+        //VALIDATING AGE
+        let patternNumber = /^[1-9]/; //Pattern to validate age
+        ageInput.onkeyup = () => { //Validating value of this input
+            if (!ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
+                ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
+                ageP.classList.add("pError");//adding the error class in this variable if this action happens
+
+
+                ageVerify.classList.remove("verifyCorrect");
+                ageP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+
+                console.log("Error age");
+            } else {
+                ageVerify.classList.add("verifyCorrect");
+                ageP.classList.add("pCorrect");
+
+                ageVerify.classList.remove("verifyError");
+                ageP.classList.remove("pError");//removing the error class in this variable if this action happens
+
+                console.log("Correct age");
+            }
+        }
+
+        //VALIDATING PRONOUN
+        let patternPronoun = /^[A-z]*[\/][A-z]*/i; //Pattern to validate pronoun
+        pronounInput.onkeyup = () => { //Validating value of this input
+            if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) { //if pronoun is empty
+                pronounVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
+                pronounP.classList.add("pError");//adding the error class in this variable if this action happens
+
+                pronounVerify.classList.remove("verifyCorrect");
+                pronounP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+
+                console.log("Error pronoun");
+            } else {
+                pronounVerify.classList.add("verifyCorrect");
+                pronounP.classList.add("pCorrect");
+
+                pronounVerify.classList.remove("verifyError");
+                pronounP.classList.remove("pError");//removing the error class in this variable if this action happens
+
+                console.log("Correct pronoun");
+            }
+
         }
     }
-
-    //VALIDATING AGE
-    let patternNumber = /^[1-9]/; //Pattern to validate age
-    ageInput.onkeyup = () => { //Validating value of this input
-        if (!ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
-            ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
-            ageP.classList.add("pError");//adding the error class in this variable if this action happens
-
-            ageVerify.classList.remove("verifyCorrect");
-            ageP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
-
-            console.log("Error age");
-        } else {
-            ageVerify.classList.add("verifyCorrect");
-            ageP.classList.add("pCorrect");
-
-            ageVerify.classList.remove("verifyError");
-            ageP.classList.remove("pError");//removing the error class in this variable if this action happens
-
-            console.log("Correct age");
-        }
-    }
-
-    //VALIDATING PRONOUN
-    let patternPronoun = /^[A-z]*[\/][A-z]*/i; //Pattern to validate pronoun
-    pronounInput.onkeyup = () => { //Validating value of this input
-        if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) { //if pronoun is empty
-            pronounVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
-            pronounP.classList.add("pError");//adding the error class in this variable if this action happens
-
-            pronounVerify.classList.remove("verifyCorrect");
-            pronounP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
-
-            console.log("Error pronoun");
-        } else {
-            pronounVerify.classList.add("verifyCorrect");
-            pronounP.classList.add("pCorrect");
-
-            pronounVerify.classList.remove("verifyError");
-            pronounP.classList.remove("pError");//removing the error class in this variable if this action happens
-
-            console.log("Correct pronoun");
-        }
-    }
-
-    //VALIDATING LOCATION
-
 }
+
 
 //TAGS INPUT
 const tagsField = document.querySelector(".inputTags"),
@@ -188,35 +237,3 @@ function remove(element, tag) {
 
     countTag();
 }
-
-/** USER LOCATION*/
-const locationField = document.querySelector('.inputLocation'),
-    locationLabel = locationField.querySelector('label');
-
-const success = (position) => {
-    console.log(position);
-
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-
-    const apiLocation = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-    fetch(apiLocation)
-        .then(res => res.json())
-        .then(data => {
-            const cityUser = data.city;
-            const countryUser = data.countryName;
-            let locationDone = cityUser + ' - ' + countryUser;
-
-            locationLabel.insertAdjacentHTML("afterbegin", locationDone);
-        })
-
-}
-const error = () => {
-    console.log("Error Location *-*");
-    let errorMessage = "Error with your location 👀"
-    locationLabel.insertAdjacentHTML("afterbegin", errorMessage);
-
-}
-
-navigator.geolocation.getCurrentPosition(success, error);
