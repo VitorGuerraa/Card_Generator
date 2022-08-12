@@ -1,24 +1,26 @@
 /**----PROFILE IMAGE UPLOAD----*/
-const imgInput = document.querySelector('#imgInput'),
-    img = document.querySelector('img');
+const imgInput = document.querySelector('#imgInput'),                   //looking for id name from HTML
+    img = document.querySelector('img');                                //looking for image tag from HTML
 
-function chooseImg() {
+function chooseImg() {                                                  //function for click on image upload box
     imgInput.click();
 }
 
-imgInput.addEventListener("change", function () {
-    const file = this.files[0];
+imgInput.addEventListener("change", function () {                       //function to store image in array
+    const file = this.files[0];                                         //array to store image
 
     if (file) {
         const reader = new FileReader();
 
-        reader.onload = function () {
+        reader.onload = function () {                                   //function to generate URL file
             const result = reader.result;
+
             img.src = result;
         }
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file);                                     //reading file and generating URL
     }
 })
+
 
 /**----CODE GENERATOR----*/
 const codeField = document.querySelector(".userCode"),
@@ -59,7 +61,7 @@ const success = (position) => {
             locationLabel.insertAdjacentHTML("afterbegin", locationDone);
         })
 
-    //VALIDATING LOCATION
+    //VALIDATING LOCATION - CORRECT
     localVerify.classList.add("verifyCorrect");
     localP.classList.add("pCorrect");
 
@@ -72,7 +74,7 @@ const error = () => {
     let errorMessage = "Error with your location 👀"
     locationLabel.insertAdjacentHTML("afterbegin", errorMessage);
 
-    //VALIDATING LOCATION
+    //VALIDATING LOCATION - ERROR
     localVerify.classList.remove("verifyCorrect");
     localP.classList.remove("pCorrect");
 
@@ -109,14 +111,15 @@ const form = document.querySelector(".container"), //looking for "Container" cla
     emojiInput = emojiField.querySelector("input"),
     emojiP = emojiField.querySelector("p");
 
+document.addEventListener("keypress", (e) => {
+    //function enviar() {
+    if (e.key === "Enter") {
+        // e.preventDefault();//"preventDefault" Prevent an action from happening
 
-form.onsubmit = (e) => {
-    e.preventDefault();//"preventDefault" Prevent an action from happening
 
-    //VALIDATING NAME
-    let patternText = /^[A-z ]+$/g; //Pattern to validate name
-    nameInput.onkeyup = () => { //Validating value of this input
-        if (!nameInput.value.match(patternText) || nameInput.value == null) { //if name is empty
+        //VALIDATING NAME
+        let patternText = /^[A-z ]+$/g; //Pattern to validate name
+        if (!nameInput.value.match(patternText) || nameInput == null) { //if name is empty
             nameVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
             nameP.classList.add("pError");//adding the error class in this variable if this action happens
 
@@ -133,15 +136,14 @@ form.onsubmit = (e) => {
 
             console.log("Correct name");
         }
-    }
+        /*nameInput.onkeyup = () => { //Validating value of this input
+        }*/
 
-    //VALIDATING AGE
-    let patternNumber = /^[1-9]/; //Pattern to validate age
-    ageInput.onkeyup = () => { //Validating value of this input
+        //VALIDATING AGE
+        let patternNumber = /^[1-9]/; //Pattern to validate age
         if (!ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
             ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
             ageP.classList.add("pError");//adding the error class in this variable if this action happens
-
 
             ageVerify.classList.remove("verifyCorrect");
             ageP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
@@ -156,11 +158,11 @@ form.onsubmit = (e) => {
 
             console.log("Correct age");
         }
-    }
+        /*ageInput.onkeyup = () => { //Validating value of this input
+        }*/
 
-    //VALIDATING PRONOUN
-    let patternPronoun = /^[A-z]*[\/][A-z]*/i; //Pattern to validate pronoun
-    pronounInput.onkeyup = () => { //Validating value of this input
+        //VALIDATING PRONOUN
+        let patternPronoun = /^[A-z]*[\/][A-z]*/i; //Pattern to validate pronoun
         if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) { //if pronoun is empty
             pronounVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
             pronounP.classList.add("pError");//adding the error class in this variable if this action happens
@@ -178,10 +180,11 @@ form.onsubmit = (e) => {
 
             console.log("Correct pronoun");
         }
-
+        /* pronounInput.onkeyup = () => { //Validating value of this input
+         }*/
     }
-}
-
+    //}
+})
 
 
 //TAGS INPUT

@@ -26,7 +26,8 @@
     --borderShadow: 5px solid var(--blackColor);
     --positionShadow: -10px 10px 0px var(--blackColor);
 
-    --borderError: 3px solid var(--pinkColor);
+    --borderSuccess: 5px solid var(--greenColor);
+    --borderError: 5px solid var(--pinkColor);
 
     /*Tags*/
 }
@@ -134,9 +135,10 @@ input[type=number]::-webkit-outer-spin-button {
 .divImg img {
     width: 100%;
     height: 100%;
+    border-radius: var(--radius40);
 
     object-fit: cover;
-    border-radius: var(--radius40);
+    /**border-radius: var(--radius40);*/
 }
 
 .userCode {
@@ -203,12 +205,12 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: var(--pinkColor);
 }
 
-.pError {
-    color: var(--pinkColor) !important;
-}
-
 .verifyCorrect {
     background-color: var(--greenColor);
+}
+
+.pError {
+    color: var(--pinkColor) !important;
 }
 
 .pCorrect {
