@@ -23,7 +23,7 @@ imgInput.addEventListener("change", function () {                       //functi
 
 
 /**----CODE GENERATOR----*/
-const codeField = document.querySelector(".userCode"),
+const codeField = document.querySelector(".userCode"),                  //looking for specifics field in HTML
     codeUl = codeField.querySelector("ul");
 
 let codeRandom = [];
