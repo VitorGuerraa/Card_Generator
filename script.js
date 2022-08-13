@@ -85,9 +85,9 @@ const error = () => {
 navigator.geolocation.getCurrentPosition(success, error);
 
 /**----INPUTS VALIDATION----*/
-const form = document.querySelector(".container"), //looking for "Container" class inside HTML document
-    nameField = form.querySelector(".inputName"), //looking for "inputName" class inside container class
-    nameVerify = nameField.querySelector(".verify"), //looking for "inputName" class inside container class
+const form = document.querySelector(".container"),                      //looking for "Container" class inside HTML document
+    nameField = form.querySelector(".inputName"),                       //looking for "inputName" class inside container class
+    nameVerify = nameField.querySelector(".verify"),                    //looking for "inputName" class inside container class
     nameInput = nameField.querySelector("input"),
     nameP = nameField.querySelector("p"),
 
@@ -111,81 +111,75 @@ const form = document.querySelector(".container"), //looking for "Container" cla
     emojiInput = emojiField.querySelector("input"),
     emojiP = emojiField.querySelector("p");
 
-document.addEventListener("keypress", (e) => {
-    //function enviar() {
-    if (e.key === "Enter") {
-        // e.preventDefault();//"preventDefault" Prevent an action from happening
 
+function enviar() {
+    //VALIDATING NAME
+    let patternText = /^[A-z ]+$/g;                                 //pattern to validate name
+    if (!nameInput.value.match(patternText) || nameInput == null) { //if name is empty
+        nameVerify.classList.add("verifyError");                    //adding the error class in this variable if this action happens
+        nameP.classList.add("pError");                              //adding the error class in this variable if this action happens
 
-        //VALIDATING NAME
-        let patternText = /^[A-z ]+$/g; //Pattern to validate name
-        if (!nameInput.value.match(patternText) || nameInput == null) { //if name is empty
-            nameVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
-            nameP.classList.add("pError");//adding the error class in this variable if this action happens
+        nameVerify.classList.remove("verifyCorrect");
+        nameP.classList.remove("pCorrect");                         //removing the error class in this variable if this action happens
 
-            nameVerify.classList.remove("verifyCorrect");
-            nameP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
+        console.log("Error name");
+    } else {
+        nameVerify.classList.add("verifyCorrect");
+        nameP.classList.add("pCorrect");
 
-            console.log("Error name");
-        } else {
-            nameVerify.classList.add("verifyCorrect");
-            nameP.classList.add("pCorrect");
+        nameVerify.classList.remove("verifyError");
+        nameP.classList.remove("pError");                           //removing the error class in this variable if this action happens
 
-            nameVerify.classList.remove("verifyError");
-            nameP.classList.remove("pError");//removing the error class in this variable if this action happens
-
-            console.log("Correct name");
-        }
-        /*nameInput.onkeyup = () => { //Validating value of this input
-        }*/
-
-        //VALIDATING AGE
-        let patternNumber = /^[1-9]/; //Pattern to validate age
-        if (!ageInput.value.match(patternNumber) || ageInput.value < 1) { //if age is empty
-            ageVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
-            ageP.classList.add("pError");//adding the error class in this variable if this action happens
-
-            ageVerify.classList.remove("verifyCorrect");
-            ageP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
-
-            console.log("Error age");
-        } else {
-            ageVerify.classList.add("verifyCorrect");
-            ageP.classList.add("pCorrect");
-
-            ageVerify.classList.remove("verifyError");
-            ageP.classList.remove("pError");//removing the error class in this variable if this action happens
-
-            console.log("Correct age");
-        }
-        /*ageInput.onkeyup = () => { //Validating value of this input
-        }*/
-
-        //VALIDATING PRONOUN
-        let patternPronoun = /^[A-z]*[\/][A-z]*/i; //Pattern to validate pronoun
-        if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) { //if pronoun is empty
-            pronounVerify.classList.add("verifyError");//adding the error class in this variable if this action happens
-            pronounP.classList.add("pError");//adding the error class in this variable if this action happens
-
-            pronounVerify.classList.remove("verifyCorrect");
-            pronounP.classList.remove("pCorrect");//removing the error class in this variable if this action happens
-
-            console.log("Error pronoun");
-        } else {
-            pronounVerify.classList.add("verifyCorrect");
-            pronounP.classList.add("pCorrect");
-
-            pronounVerify.classList.remove("verifyError");
-            pronounP.classList.remove("pError");//removing the error class in this variable if this action happens
-
-            console.log("Correct pronoun");
-        }
-        /* pronounInput.onkeyup = () => { //Validating value of this input
-         }*/
+        console.log("Correct name");
     }
-    //}
-})
+    /*nameInput.onkeyup = () => {                                   //validating value of this input
+    }*/
 
+    //VALIDATING AGE
+    let patternNumber = /^[1-9]/;                                   //pattern to validate age
+    if (!ageInput.value.match(patternNumber) || ageInput.value < 1) {       //if age is empty
+        ageVerify.classList.add("verifyError");                     //adding the error class in this variable if this action happens
+        ageP.classList.add("pError");                               //adding the error class in this variable if this action happens
+
+        ageVerify.classList.remove("verifyCorrect");
+        ageP.classList.remove("pCorrect");                          //removing the error class in this variable if this action happens
+
+        console.log("Error age");
+    } else {
+        ageVerify.classList.add("verifyCorrect");
+        ageP.classList.add("pCorrect");
+
+        ageVerify.classList.remove("verifyError");
+        ageP.classList.remove("pError");                            //removing the error class in this variable if this action happens
+
+        console.log("Correct age");
+    }
+    /*ageInput.onkeyup = () => {                                    //validating value of this input
+    }*/
+
+    //VALIDATING PRONOUN
+    let patternPronoun = /^[A-z]*[\/][A-z]*/i;                      //pattern to validate pronoun
+    if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) {      //if pronoun is empty
+        pronounVerify.classList.add("verifyError");                 //adding the error class in this variable if this action happens
+        pronounP.classList.add("pError");                           //adding the error class in this variable if this action happens
+
+        pronounVerify.classList.remove("verifyCorrect");
+        pronounP.classList.remove("pCorrect");                      //removing the error class in this variable if this action happens
+
+        console.log("Error pronoun");
+    } else {
+        pronounVerify.classList.add("verifyCorrect");
+        pronounP.classList.add("pCorrect");
+
+        pronounVerify.classList.remove("verifyError");
+        pronounP.classList.remove("pError");                        //removing the error class in this variable if this action happens
+
+        console.log("Correct pronoun");
+    }
+    /* pronounInput.onkeyup = () => {                               //validating value of this input
+    }*/
+    //})
+}
 
 //TAGS INPUT
 const tagsField = document.querySelector(".inputTags"),
@@ -205,13 +199,13 @@ function countTag() {
     countNumb.innerText = maxTags - tags.length;
 }
 
-function createTag(e) { // creating tag in array
-    if (e.key == "Enter") { //detecting "enter" key pressing
-        let tag = e.target.value.replace(/\s+/g, ' ');//swapping any extra space for one in the input tag
+function createTag(e) {                                                 //creating tag in array
+    if (e.key == "Enter") {                                             //detecting "enter" key pressing
+        let tag = e.target.value.replace(/\s+/g, ' ');                  //swapping any extra space for one in the input tag
 
-        if (tag.length > 0 && !tags.includes(tag)) {//checking text standardization
-            if (tags.length < maxTags) { //checking the max capacity of the array
-                tag.split(',').forEach(tag => { //action to separate tags after comma 
+        if (tag.length > 0 && !tags.includes(tag)) {                    //checking text standardization
+            if (tags.length < maxTags) {                                //checking the max capacity of the array
+                tag.split(',').forEach(tag => {                         //action to separate tags after comma 
                     tags.push(tag);
                     buildTag();
                 })
@@ -221,7 +215,7 @@ function createTag(e) { // creating tag in array
     }
 }
 
-function buildTag() { //creating the tag in HTML code
+function buildTag() {                                                   //creating the tag in HTML code
     tagsUl.querySelectorAll("li").forEach(li => li.remove());
 
     tags.slice().reverse().forEach(tag => {
