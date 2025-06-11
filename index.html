@@ -36,7 +36,7 @@
                     <div class="divInput inputName">
                         <div class="infosInput">
                             <p class="">name</p>
-                            <input type="text" placeholder="Abc"></input>
+                            <input type="text" placeholder="Abc" pattern="[A-Za-zÀ-ÿ\s]+" title="Somente letras" />
                         </div>
                         <div class="verify"></div>
                     </div>
@@ -55,21 +55,21 @@
                     <div class="divInput inputPronoun">
                         <div class="infosInput">
                             <p class="">pronoun</p>
-                            <input type="text" placeholder="--/--"></input>
+                            <input type="text" placeholder="--/--" pattern="[A-Za-zÀ-ÿ]+/[A-Za-zÀ-ÿ]+" title="formato ex: ela/dela" />
                         </div>
                         <div class="verify"></div>
                     </div>
                     <div class="divInput inputAge">
                         <div class="infosInput">
                             <p class="">age</p>
-                            <input type="number" placeholder="--"></input>
+                            <input type="number" placeholder="--" min="1" pattern="\d+" title="Somente números" />
                         </div>
                         <div class="verify"></div>
                     </div>
                     <div class="divInput inputEmoji">
                         <div class="infosInput">
                             <p class="">emoji</p>
-                            <input type="text" placeholder="👽"></input>
+                            <input type="text" placeholder="👽" />
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <div class="infosInput">
                     <p class="">tags - 5 maximum <span class="countNumb"></span></p>
                         <ul>
-                            <input type="text" placeholder="write here..."></input>
+                            <input type="text" placeholder="write here..." />
                         </ul>
                     </div>
                     <div class="verify"></div>

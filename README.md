@@ -11,6 +11,9 @@ Este projeto cria um card de perfil simples utilizando HTML, CSS e JavaScript.
 
 ## Melhorias incluídas
 - Contador visual para as tags disponíveis.
+- Sistema de tags mais intuitivo: ao digitar vírgula, espaço ou Enter a tag é
+  criada automaticamente.
+- Validação de nome e idade mais restritiva (somente letras ou números).
 - Texto alternativo para a imagem de perfil.
 - Pequenas correções de estilo e organização de código.
 - Comentários nos arquivos para auxiliar quem está iniciando no projeto.
