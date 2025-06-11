@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
 
+/*
+  Folha de estilos principal do gerador de cards.
+  As variáveis CSS tornam fácil personalizar cores e espaçamentos.
+*/
+
 
 :root {
-    /*Colors*/
+    /* Paleta de cores */
     --blackColor: #191919;
     --silver2Color: #A4A4A4;
     --silver1Color: #D2D2D2;
@@ -13,16 +18,16 @@
     --orangeColor: #DD4200;
     --pinkColor: #DD0035;
 
-    /*Border*/
+    /* Raios de borda */
     --radius40: 2.500rem;
     --radius25: 1.562rem;
     --radius10: .625rem;
     --radius05: .312rem;
 
-    /*Padding*/
+    /* Espaçamentos */
     --padding10: 0.625rem;
 
-    /*Shadow Style*/
+    /* Estilos de sombra */
     --borderShadow: 5px solid var(--blackColor);
     --positionShadow: -10px 10px 0px var(--blackColor);
 
@@ -70,6 +75,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .container {
+    /* Área principal onde o card e o botão são exibidos */
     width: 943px;
     height: 800px;
 
@@ -80,6 +86,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .card {
+    /* Estrutura visual do card de perfil */
     background: var(--blueColor);
     width: 100%;
     height: 460px;
@@ -163,6 +170,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .divInput {
+    /* Bloco individual de entrada de dados */
     background: var(--whiteColor);
 
     display: flex;
@@ -277,7 +285,14 @@ label {
     color: var(--blackColor);
 }
 
+.countNumb {
+    /* Exibe quantas tags ainda podem ser adicionadas */
+    margin-left: 5px;
+    font-weight: 700;
+}
+
 .saveBtn {
+    /* Botão que envia as informações preenchidas */
     background: var(--blueColor);
     width: 100px;
     height: 100px;
