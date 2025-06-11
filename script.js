@@ -5,6 +5,7 @@
 const imgInput = document.querySelector('#imgInput');
 // Imagem de pré-visualização exibida no card
 const imgPreview = document.querySelector('img');
+const imgPlaceholder = document.querySelector('.imgPlaceholder');
 
 // Abre o seletor de arquivos quando a área da imagem é clicada
 function chooseImg() {
@@ -19,6 +20,8 @@ imgInput.addEventListener("change", () => {
     const reader = new FileReader();
     reader.onload = () => {
         imgPreview.src = reader.result;
+        imgPlaceholder.style.display = "none";
+        imgPreview.removeAttribute('hidden');
     };
     reader.readAsDataURL(file);
 });
@@ -96,49 +99,48 @@ const ageP = ageField.querySelector("p");
 const emojiField = form.querySelector(".inputEmoji");
 const emojiInput = emojiField.querySelector("input");
 
+function setVerify(element, paragraph, valid) {
+    if (valid) {
+        element.classList.add("verifyCorrect");
+        element.classList.remove("verifyError");
+        paragraph.classList.add("pCorrect");
+        paragraph.classList.remove("pError");
+    } else {
+        element.classList.add("verifyError");
+        element.classList.remove("verifyCorrect");
+        paragraph.classList.add("pError");
+        paragraph.classList.remove("pCorrect");
+    }
+}
+
+function validateName() {
+    const patternText = /^[A-Za-zÀ-ÿ ]+$/;
+    setVerify(nameVerify, nameP, patternText.test(nameInput.value));
+}
+
+function validateAge() {
+    const age = parseInt(ageInput.value, 10);
+    const valid = !isNaN(age) && age > 0;
+    setVerify(ageVerify, ageP, valid);
+}
+
+function validatePronoun() {
+    if (pronounInput.value.includes(" ")) {
+        pronounInput.value = pronounInput.value.replace(/\s+/, '/');
+    }
+    const patternPronoun = /^[A-Za-zÀ-ÿ]+\/[A-Za-zÀ-ÿ]+$/;
+    setVerify(pronounVerify, pronounP, patternPronoun.test(pronounInput.value));
+}
+
+nameInput.addEventListener("input", validateName);
+ageInput.addEventListener("input", validateAge);
+pronounInput.addEventListener("input", validatePronoun);
+
 // Valida os campos principais e aplica estilos de erro/sucesso
 function enviar() {
-    // Nome deve conter apenas letras e espaços
-    const patternText = /^[A-z ]+$/g;
-    if (!nameInput.value.match(patternText)) {
-        nameVerify.classList.add("verifyError");
-        nameVerify.classList.remove("verifyCorrect");
-        nameP.classList.add("pError");
-        nameP.classList.remove("pCorrect");
-    } else {
-        nameVerify.classList.remove("verifyError");
-        nameVerify.classList.add("verifyCorrect");
-        nameP.classList.remove("pError");
-        nameP.classList.add("pCorrect");
-    }
-
-    // Idade deve ser um número positivo
-    const patternNumber = /^[1-9]/;
-    if (!ageInput.value.match(patternNumber) || ageInput.value < 1) {
-        ageVerify.classList.add("verifyError");
-        ageVerify.classList.remove("verifyCorrect");
-        ageP.classList.add("pError");
-        ageP.classList.remove("pCorrect");
-    } else {
-        ageVerify.classList.remove("verifyError");
-        ageVerify.classList.add("verifyCorrect");
-        ageP.classList.remove("pError");
-        ageP.classList.add("pCorrect");
-    }
-
-    // Pronome no formato "xx/yy" (ex.: ela/dela)
-    const patternPronoun = /^[A-z]*[\/][A-z]*/i;
-    if (!pronounInput.value.match(patternPronoun)) {
-        pronounVerify.classList.add("verifyError");
-        pronounVerify.classList.remove("verifyCorrect");
-        pronounP.classList.add("pError");
-        pronounP.classList.remove("pCorrect");
-    } else {
-        pronounVerify.classList.remove("verifyError");
-        pronounVerify.classList.add("verifyCorrect");
-        pronounP.classList.remove("pError");
-        pronounP.classList.add("pCorrect");
-    }
+    validateName();
+    validateAge();
+    validatePronoun();
 }
 
 // ---------- Seção: Adição de tags ----------
@@ -191,3 +193,19 @@ function createTag(e) {
 
 tagsInput.addEventListener("keyup", createTag);
 countTag();
+
+// ---------- Seção: Geração de PDF ----------
+function generatePDF() {
+    enviar();
+    const card = document.querySelector('.card');
+    html2canvas(card).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF({
+            orientation: 'portrait',
+            unit: 'px',
+            format: [card.offsetWidth, card.offsetHeight]
+        });
+        pdf.addImage(imgData, 'PNG', 0, 0, card.offsetWidth, card.offsetHeight);
+        pdf.save('card.pdf');
+    });
+}
