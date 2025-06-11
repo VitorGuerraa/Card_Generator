@@ -13,19 +13,24 @@
 
 <body>
     <div class="container">
+        <!-- Cartão de perfil -->
         <div class="card shadow">
             <div class="colum1">
+                <!-- Área de upload da imagem -->
                 <div onclick="chooseImg()" class="divImg">
-                    <img src=" " alt="">
+                    <img src="" alt="Preview">
                 </div>
                 <input id="imgInput" type="file" hidden>
 
+                <!-- Código aleatório exibido abaixo da imagem -->
                 <div class="userCode">
                     <ul>
                     </ul>
                 </div>
             </div>
+            <!-- Campos do formulário -->
             <div class="colum2">
+                <!-- Primeira linha de campos -->
                 <div>
                     <div class="divInput inputName">
                         <div class="infosInput">
@@ -44,6 +49,7 @@
                         <div class="verify"></div>
                     </div>
                 </div>
+                <!-- Segunda linha de campos -->
                 <div>
                     <div class="divInput inputPronoun">
                         <div class="infosInput">
@@ -66,9 +72,10 @@
                         </div>
                     </div>
                 </div>
+                <!-- Campo para adicionar tags -->
                 <div class="divInput inputTags">
                     <div class="infosInput">
-                        <p class="">tags - 5 maximum</p>
+                    <p class="">tags - 5 maximum <span class="countNumb"></span></p>
                         <ul>
                             <input type="text" placeholder="write here..."></input>
                         </ul>
@@ -77,6 +84,7 @@
                 </div>
             </div>
         </div>
+        <!-- Botão para disparar a validação -->
         <button onclick="enviar()" value="*-*" class="saveBtn shadow"></button>
     </div>
 

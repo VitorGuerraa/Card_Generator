@@ -1,235 +1,193 @@
-/**----PROFILE IMAGE UPLOAD----*/
-const imgInput = document.querySelector('#imgInput'),                   //looking for id name from HTML
-    img = document.querySelector('img');                                //looking for image tag from HTML
+"use strict";
 
-function chooseImg() {                                                  //function for click on image upload box
+// ---------- Seção: Upload da imagem de perfil ----------
+// Input escondido responsável por selecionar a imagem
+const imgInput = document.querySelector('#imgInput');
+// Imagem de pré-visualização exibida no card
+const imgPreview = document.querySelector('img');
+
+// Abre o seletor de arquivos quando a área da imagem é clicada
+function chooseImg() {
     imgInput.click();
 }
 
-imgInput.addEventListener("change", function () {                       //function to store image in array
-    const file = this.files[0];                                         //array to store image
+// Carrega e exibe a imagem escolhida
+imgInput.addEventListener("change", () => {
+    const file = imgInput.files[0];
+    if (!file) return;
 
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function () {                                   //function to generate URL file
-            const result = reader.result;
-
-            img.src = result;
-        }
-        reader.readAsDataURL(file);                                     //reading file and generating URL
-    }
-})
-
-
-/**----CODE GENERATOR----*/
-const codeField = document.querySelector(".userCode"),                  //looking for specifics field in HTML
-    codeUl = codeField.querySelector("ul");
-
-let codeRandom = [];
-
-while (codeRandom.length < 6) {
-    let code = Math.floor(Math.random() * 9) + 1;
-    if (codeRandom.indexOf(code) === -1) codeRandom.push(code);
-}
-
-codeRandom.slice().reverse().forEach(code => {
-    let codeLi = `<li>${code}</li>`;
-    codeUl.insertAdjacentHTML("afterbegin", codeLi);
+    const reader = new FileReader();
+    reader.onload = () => {
+        imgPreview.src = reader.result;
+    };
+    reader.readAsDataURL(file);
 });
 
-/** USER LOCATION*/
-const locationField = document.querySelector('.inputLocation'),
-    locationLabel = locationField.querySelector('label');
+// ---------- Seção: Gerador de código aleatório ----------
+const codeField = document.querySelector(".userCode");
+const codeUl = codeField.querySelector("ul");
 
-let statusLocation;
+const codeRandom = [];
+while (codeRandom.length < 6) {
+    const digit = Math.floor(Math.random() * 9) + 1;
+    if (!codeRandom.includes(digit)) {
+        codeRandom.push(digit);
+    }
+}
 
-const success = (position) => {
-    console.log(position);
+codeRandom.slice().reverse().forEach(d => {
+    codeUl.insertAdjacentHTML("afterbegin", `<li>${d}</li>`);
+});
 
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+// ---------- Seção: Localização do usuário ----------
+const locationField = document.querySelector('.inputLocation');
+const locationLabel = locationField.querySelector('label');
 
-    const apiLocation = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-    fetch(apiLocation)
+function onLocationSuccess(position) {
+    const { latitude, longitude } = position.coords;
+    const url =
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
+    fetch(url)
         .then(res => res.json())
         .then(data => {
-            const cityUser = data.city;
-            const countryUser = data.countryName;
-            let locationDone = cityUser + ' - ' + countryUser;
+            const locationDone = `${data.city} - ${data.countryName}`;
+            locationLabel.textContent = locationDone;
+        });
 
-            locationLabel.insertAdjacentHTML("afterbegin", locationDone);
-        })
-
-    //VALIDATING LOCATION - CORRECT
     localVerify.classList.add("verifyCorrect");
     localP.classList.add("pCorrect");
-
     localVerify.classList.remove("verifyError");
     localP.classList.remove("pError");
-
 }
-const error = () => {
-    console.log("Error Location *-*");
-    let errorMessage = "Error with your location 👀"
-    locationLabel.insertAdjacentHTML("afterbegin", errorMessage);
 
-    //VALIDATING LOCATION - ERROR
+function onLocationError() {
+    locationLabel.textContent = "Error with your location 👀";
+
     localVerify.classList.remove("verifyCorrect");
     localP.classList.remove("pCorrect");
-
     localVerify.classList.add("verifyError");
     localP.classList.add("pError");
 }
 
-navigator.geolocation.getCurrentPosition(success, error);
+navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError);
 
-/**----INPUTS VALIDATION----*/
-const form = document.querySelector(".container"),                      //looking for "Container" class inside HTML document
-    nameField = form.querySelector(".inputName"),                       //looking for "inputName" class inside container class
-    nameVerify = nameField.querySelector(".verify"),                    //looking for "inputName" class inside container class
-    nameInput = nameField.querySelector("input"),
-    nameP = nameField.querySelector("p"),
+// ---------- Seção: Validação dos campos do formulário ----------
+const form = document.querySelector(".container");
+const nameField = form.querySelector(".inputName");
+const nameVerify = nameField.querySelector(".verify");
+const nameInput = nameField.querySelector("input");
+const nameP = nameField.querySelector("p");
 
-    localField = form.querySelector(".inputLocation"),
-    localVerify = localField.querySelector(".verify"),
-    localInput = localField.querySelector("input"),
-    localP = localField.querySelector("p"),
+const localField = form.querySelector(".inputLocation");
+const localVerify = localField.querySelector(".verify");
+const localInput = localField.querySelector("input");
+const localP = localField.querySelector("p");
 
-    pronounField = form.querySelector(".inputPronoun"),
-    pronounVerify = pronounField.querySelector(".verify"),
-    pronounInput = pronounField.querySelector("input"),
-    pronounP = pronounField.querySelector("p"),
+const pronounField = form.querySelector(".inputPronoun");
+const pronounVerify = pronounField.querySelector(".verify");
+const pronounInput = pronounField.querySelector("input");
+const pronounP = pronounField.querySelector("p");
 
-    ageField = form.querySelector(".inputAge"),
-    ageVerify = ageField.querySelector(".verify"),
-    ageInput = ageField.querySelector("input"),
-    ageP = ageField.querySelector("p"),
+const ageField = form.querySelector(".inputAge");
+const ageVerify = ageField.querySelector(".verify");
+const ageInput = ageField.querySelector("input");
+const ageP = ageField.querySelector("p");
 
-    emojiField = form.querySelector(".inputEmoji"),
-    emojiVerify = emojiField.querySelector(".verify"),
-    emojiInput = emojiField.querySelector("input"),
-    emojiP = emojiField.querySelector("p");
+const emojiField = form.querySelector(".inputEmoji");
+const emojiInput = emojiField.querySelector("input");
 
-
+// Valida os campos principais e aplica estilos de erro/sucesso
 function enviar() {
-    //VALIDATING NAME
-    let patternText = /^[A-z ]+$/g;                                 //pattern to validate name
-    if (!nameInput.value.match(patternText) || nameInput == null) { //if name is empty
-        nameVerify.classList.add("verifyError");                    //adding the error class in this variable if this action happens
-        nameP.classList.add("pError");                              //adding the error class in this variable if this action happens
-
+    // Nome deve conter apenas letras e espaços
+    const patternText = /^[A-z ]+$/g;
+    if (!nameInput.value.match(patternText)) {
+        nameVerify.classList.add("verifyError");
         nameVerify.classList.remove("verifyCorrect");
-        nameP.classList.remove("pCorrect");                         //removing the error class in this variable if this action happens
-
-        console.log("Error name");
+        nameP.classList.add("pError");
+        nameP.classList.remove("pCorrect");
     } else {
-        nameVerify.classList.add("verifyCorrect");
-        nameP.classList.add("pCorrect");
-
         nameVerify.classList.remove("verifyError");
-        nameP.classList.remove("pError");                           //removing the error class in this variable if this action happens
-
-        console.log("Correct name");
+        nameVerify.classList.add("verifyCorrect");
+        nameP.classList.remove("pError");
+        nameP.classList.add("pCorrect");
     }
-    /*nameInput.onkeyup = () => {                                   //validating value of this input
-    }*/
 
-    //VALIDATING AGE
-    let patternNumber = /^[1-9]/;                                   //pattern to validate age
-    if (!ageInput.value.match(patternNumber) || ageInput.value < 1) {       //if age is empty
-        ageVerify.classList.add("verifyError");                     //adding the error class in this variable if this action happens
-        ageP.classList.add("pError");                               //adding the error class in this variable if this action happens
-
+    // Idade deve ser um número positivo
+    const patternNumber = /^[1-9]/;
+    if (!ageInput.value.match(patternNumber) || ageInput.value < 1) {
+        ageVerify.classList.add("verifyError");
         ageVerify.classList.remove("verifyCorrect");
-        ageP.classList.remove("pCorrect");                          //removing the error class in this variable if this action happens
-
-        console.log("Error age");
+        ageP.classList.add("pError");
+        ageP.classList.remove("pCorrect");
     } else {
-        ageVerify.classList.add("verifyCorrect");
-        ageP.classList.add("pCorrect");
-
         ageVerify.classList.remove("verifyError");
-        ageP.classList.remove("pError");                            //removing the error class in this variable if this action happens
-
-        console.log("Correct age");
+        ageVerify.classList.add("verifyCorrect");
+        ageP.classList.remove("pError");
+        ageP.classList.add("pCorrect");
     }
-    /*ageInput.onkeyup = () => {                                    //validating value of this input
-    }*/
 
-    //VALIDATING PRONOUN
-    let patternPronoun = /^[A-z]*[\/][A-z]*/i;                      //pattern to validate pronoun
-    if (!pronounInput.value.match(patternPronoun) || pronounInput.value == null) {      //if pronoun is empty
-        pronounVerify.classList.add("verifyError");                 //adding the error class in this variable if this action happens
-        pronounP.classList.add("pError");                           //adding the error class in this variable if this action happens
-
+    // Pronome no formato "xx/yy" (ex.: ela/dela)
+    const patternPronoun = /^[A-z]*[\/][A-z]*/i;
+    if (!pronounInput.value.match(patternPronoun)) {
+        pronounVerify.classList.add("verifyError");
         pronounVerify.classList.remove("verifyCorrect");
-        pronounP.classList.remove("pCorrect");                      //removing the error class in this variable if this action happens
-
-        console.log("Error pronoun");
+        pronounP.classList.add("pError");
+        pronounP.classList.remove("pCorrect");
     } else {
-        pronounVerify.classList.add("verifyCorrect");
-        pronounP.classList.add("pCorrect");
-
         pronounVerify.classList.remove("verifyError");
-        pronounP.classList.remove("pError");                        //removing the error class in this variable if this action happens
-
-        console.log("Correct pronoun");
+        pronounVerify.classList.add("verifyCorrect");
+        pronounP.classList.remove("pError");
+        pronounP.classList.add("pCorrect");
     }
-    /* pronounInput.onkeyup = () => {                               //validating value of this input
-    }*/
-    //})
 }
 
-//TAGS INPUT
-const tagsField = document.querySelector(".inputTags"),
-    tagsUl = tagsField.querySelector("ul"),
-    tagsInput = tagsUl.querySelector("input"),
-    countNumb = 0;
+// ---------- Seção: Adição de tags ----------
+const tagsField = document.querySelector(".inputTags");
+const tagsUl = tagsField.querySelector("ul");
+const tagsInput = tagsUl.querySelector("input");
+const countNumb = tagsField.querySelector(".countNumb");
 
-let tags = [],
-    maxTags = 5;
+let tags = [];
+const maxTags = 5;
 
-tagsInput.addEventListener("keyup", createTag);
-
-countTag();
-
-
+// Atualiza o contador de tags restantes
 function countTag() {
-    countNumb.innerText = maxTags - tags.length;
+    countNumb.textContent = maxTags - tags.length;
 }
 
-function createTag(e) {                                                 //creating tag in array
-    if (e.key == "Enter") {                                             //detecting "enter" key pressing
-        let tag = e.target.value.replace(/\s+/g, ' ');                  //swapping any extra space for one in the input tag
-
-        if (tag.length > 0 && !tags.includes(tag)) {                    //checking text standardization
-            if (tags.length < maxTags) {                                //checking the max capacity of the array
-                tag.split(',').forEach(tag => {                         //action to separate tags after comma 
-                    tags.push(tag);
-                    buildTag();
-                })
-            }
-        }
-        e.target.value = '';
-    }
-}
-
-function buildTag() {                                                   //creating the tag in HTML code
+// Constrói o HTML das tags existentes
+function buildTag() {
     tagsUl.querySelectorAll("li").forEach(li => li.remove());
 
     tags.slice().reverse().forEach(tag => {
-        let tagIl = `<li>${tag} <i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
-        tagsUl.insertAdjacentHTML("afterbegin", tagIl);
+        const tagLi = `<li>${tag} <i class="uit uit-multiply" onclick="removeTag(this, '${tag}')"></i></li>`;
+        tagsUl.insertAdjacentHTML("afterbegin", tagLi);
     });
 
     countTag();
 }
 
-function remove(element, tag) {
-    let index = tags.indexOf(tag);
+// Remove tag específica
+function removeTag(element, tag) {
+    const index = tags.indexOf(tag);
     tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
     element.parentElement.remove();
-
     countTag();
 }
+
+// Cria nova tag quando o usuário pressiona Enter
+function createTag(e) {
+    if (e.key === "Enter") {
+        const tag = e.target.value.replace(/\s+/g, ' ');
+        if (tag.length > 0 && !tags.includes(tag) && tags.length < maxTags) {
+            tag.split(',').forEach(t => {
+                tags.push(t);
+                buildTag();
+            });
+        }
+        e.target.value = '';
+    }
+}
+
+tagsInput.addEventListener("keyup", createTag);
+countTag();
