@@ -18,9 +18,10 @@
             <div class="colum1">
                 <!-- Área de upload da imagem -->
                 <div onclick="chooseImg()" class="divImg">
-                    <img src="" alt="Preview">
+                    <span class="imgPlaceholder">add image</span>
+                    <img src="" alt="Preview" hidden>
                 </div>
-                <input id="imgInput" type="file" hidden>
+                <input id="imgInput" type="file" accept="image/*" hidden>
 
                 <!-- Código aleatório exibido abaixo da imagem -->
                 <div class="userCode">
@@ -84,10 +85,12 @@
                 </div>
             </div>
         </div>
-        <!-- Botão para disparar a validação -->
-        <button onclick="enviar()" value="*-*" class="saveBtn shadow"></button>
+        <!-- Botão para gerar o PDF do card -->
+        <button onclick="generatePDF()" value="*-*" class="saveBtn shadow"></button>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="./script.js"></script>
 </body>
 

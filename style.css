@@ -135,8 +135,12 @@ input[type=number]::-webkit-outer-spin-button {
     width: 217px;
     height: 217px;
 
+    position: relative;
     cursor: pointer;
     border-radius: var(--radius40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .divImg img {
@@ -146,6 +150,14 @@ input[type=number]::-webkit-outer-spin-button {
 
     object-fit: cover;
     /**border-radius: var(--radius40);*/
+}
+
+.imgPlaceholder {
+    position: absolute;
+    color: var(--silver2Color);
+    font-size: 14px;
+    pointer-events: none;
+    text-align: center;
 }
 
 .userCode {
