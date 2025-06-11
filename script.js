@@ -132,8 +132,18 @@ function validatePronoun() {
     setVerify(pronounVerify, pronounP, patternPronoun.test(pronounInput.value));
 }
 
-nameInput.addEventListener("input", validateName);
-ageInput.addEventListener("input", validateAge);
+// Limita o campo nome apenas a letras durante a digitação
+nameInput.addEventListener("input", e => {
+    e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]+/g, "");
+    validateName();
+});
+
+// Garante que o campo idade receba apenas números
+ageInput.addEventListener("input", e => {
+    e.target.value = e.target.value.replace(/\D+/g, "");
+    validateAge();
+});
+
 pronounInput.addEventListener("input", validatePronoun);
 
 // Valida os campos principais e aplica estilos de erro/sucesso
@@ -177,21 +187,32 @@ function removeTag(element, tag) {
     countTag();
 }
 
-// Cria nova tag quando o usuário pressiona Enter
-function createTag(e) {
-    if (e.key === "Enter") {
-        const tag = e.target.value.replace(/\s+/g, ' ');
-        if (tag.length > 0 && !tags.includes(tag) && tags.length < maxTags) {
-            tag.split(',').forEach(t => {
-                tags.push(t);
-                buildTag();
-            });
+// Adiciona tag quando usuário pressiona Enter, vírgula ou espaço
+function addTagsFromValue(value) {
+    value.split(/[\s,]+/).forEach(t => {
+        const tag = t.trim();
+        if (tag && !tags.includes(tag) && tags.length < maxTags) {
+            tags.push(tag);
         }
-        e.target.value = '';
+    });
+    buildTag();
+}
+
+function handleTagInput(e) {
+    if (["Enter", ",", " "].includes(e.key)) {
+        e.preventDefault();
+        addTagsFromValue(e.target.value);
+        e.target.value = "";
     }
 }
 
-tagsInput.addEventListener("keyup", createTag);
+function handleTagBlur(e) {
+    addTagsFromValue(e.target.value);
+    e.target.value = "";
+}
+
+tagsInput.addEventListener("keydown", handleTagInput);
+tagsInput.addEventListener("blur", handleTagBlur);
 countTag();
 
 // ---------- Seção: Geração de PDF ----------
