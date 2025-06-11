@@ -221,12 +221,19 @@ function generatePDF() {
     const card = document.querySelector('.card');
     html2canvas(card).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
+
+        const rect = card.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const orientation = width > height ? 'landscape' : 'portrait';
+
         const pdf = new jspdf.jsPDF({
-            orientation: 'portrait',
+            orientation,
             unit: 'px',
-            format: [card.offsetWidth, card.offsetHeight]
+            format: [width, height]
         });
-        pdf.addImage(imgData, 'PNG', 0, 0, card.offsetWidth, card.offsetHeight);
+
+        pdf.addImage(imgData, 'PNG', 0, 0, width, height);
         pdf.save('card.pdf');
     });
 }
